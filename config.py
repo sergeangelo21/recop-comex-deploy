@@ -18,7 +18,7 @@ class Config(object):
 	MAIL_PASSWORD = "recopcomex"
 	MAIL_ASCII_ATTACHMENTS = True 
 
-	PDF_CONFIG = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
+	#PDF_CONFIG = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
 	
 	POSTS_PER_PAGE = 12
 
