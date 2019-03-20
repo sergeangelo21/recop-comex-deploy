@@ -8,7 +8,7 @@ from blueprints.registered import registered
 from blueprints.religious_admin import religious_admin
 from blueprints.unregistered import unregistered
 
-from extensions import login, db, migrate, bcrypt, mail
+from extensions import login, db, bcrypt, mail
 
 def create_app():
 
@@ -31,7 +31,6 @@ def extensions(app):
 	bcrypt.init_app(app)
 	login.init_app(app)
 	db.init_app(app)
-	migrate.init_app(app, db)
 	mail.init_app(app)
 
 	return None

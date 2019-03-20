@@ -8,8 +8,7 @@ class Config(object):
 	CSRF_ENABLED = True
 	SECRET_KEY = 'together_we_can'
 	SECURITY_PASSWORD_SALT = "yes_we_can"
-	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
-	SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'migrations')
+	SQLALCHEMY_DATABASE_URI = 'sqlite:///app.db'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	#SQLALCHEMY_ECHO = True
 
