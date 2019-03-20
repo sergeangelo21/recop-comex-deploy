@@ -35,4 +35,4 @@ def extensions(app):
 
 	return None
 
-create_app().run(port=8000, debug=1)
+create_app().run(debug=1)
