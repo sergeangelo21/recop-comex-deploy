@@ -1,14 +1,13 @@
 import pdfkit
 import os
 
-basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
 	
 	CSRF_ENABLED = True
 	SECRET_KEY = 'together_we_can'
 	SECURITY_PASSWORD_SALT = "yes_we_can"
-	SQLALCHEMY_DATABASE_URI = 'sqlite:///app.db'
+	SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	#SQLALCHEMY_ECHO = True
 
