@@ -34,5 +34,3 @@ def extensions(app):
 	mail.init_app(app)
 
 	return None
-
-create_app().run(port=8000, debug=1)
