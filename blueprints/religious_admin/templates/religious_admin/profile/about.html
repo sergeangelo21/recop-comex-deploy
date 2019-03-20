@@ -1,0 +1,224 @@
+{% extends "religious_admin-base.html" %}
+
+{% block content %}
+		<div class="panel panel-default">
+		    <div class="overlay-card has-text-centered">
+		    	<div class="circular">
+		    		{% if photo.path %}
+		    		<img src="../../../{{photo.path}}" id='dp'>
+		    		{% else %}
+		    		<img src="../../../static/images/user-default.png" id='dp'>
+		    		{% endif %}
+		    		<button class="button is-small add" style="top:85%;" onclick='show_profile()'><i class="fas fa-pen"></i></button>
+		    	</div>
+
+		        <div class="row-profile has-text-centered">
+		            <p class="has-text-white is-size-3 has-text-weight-bold">{{ religious_admin.first_name }} {{ religious_admin.middle_name }} {{ religious_admin.last_name}} ({{ religious_admin.username }}) </p>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ religious_admin.company_name }}</a><br>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ religious_admin.email_address }}</a>
+		        </div>
+		    </div>
+		   	
+		</div>
+
+		<nav class="level is-mobile">
+			<div class="level-item has-text-centered">
+			    <div class="active-prof-nav">
+			      	<a class="menu prof-icon" href="{{url_for('religious_admin.profile_about', user=current_user.username)}}">
+			      		<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-user fa-2x"></i>
+					      	</span>
+					    </p>
+			     	 	<p class="is-size-6 has-text-weight-bold">About</p>
+			  	  	</a>
+			    </div>
+			</div>
+
+			<div class="level-item has-text-centered">
+			    <div class="active-prof-nav">
+			    	<a class="menu prof-icon" href="{{url_for('religious_admin.profile_settings_personal', user=current_user.username)}}">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-cog fa-2x"></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Settings</p>
+				    </a>
+			    </div>
+			</div>
+		</nav>
+
+		<section class="hero">
+			<div class="hero-body">
+			    <div class="container">
+			      	<div class="card">
+			      		<header class="card-header has-background-light">
+						    <p class="card-header-title">
+						      Basic Information
+						    </p>
+					  	</header>
+					  	<div class="card-content profile">
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<span><i class="fas fa-user prof-panel-icon"></i></span>
+								    	<p>Name</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{ religious_admin.first_name }} {{ religious_admin.middle_name }} {{ religious_admin.last_name }}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+
+					  	
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<span><i class="fas fa-user-tag prof-panel-icon"></i></span>
+								    	<p>Bio</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{ religious_admin.bio }}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+
+							<div class="panel-block">
+						    	<article class="media">
+									<figure class="media-left">
+										<span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
+							    		<p>Lives in</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>{{ religious_admin.address }}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							  			<span><i class="fas fa-birthday-cake prof-panel-icon"></i></span>
+							    		<p>Birthday</p>
+							  		</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>{{ religious_admin.birthday }}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						     	<article class="media">
+							  		<figure class="media-left">
+							  			<span><i class="fas fa-venus-mars prof-panel-icon"></i></span>
+							    		<p>Gender</p>
+							    	</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							      				{% if religious_admin.gender == 'M' %}
+								        			<strong>Male</strong>
+								        		{% else %}
+								        			<strong>Female</strong>
+								        		{% endif %}
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							  			<span><i class="fas fa-phone prof-panel-icon"></i></span>
+							    		<p>Telephone Number</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			{% if religious_admin.telephone=='' %}
+						                            <strong>None</strong>
+					                            {% else %}
+					                            	<strong>{{religious_admin.telephone}}</strong>
+					                            {% endif %}
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							  			<span><i class="fas fa-mobile prof-panel-icon"></i></span>
+							    		<p>Mobile Number</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							      				 {% if religious_admin.mobile_number=='' %}
+						                            <strong>None</strong>
+						                            {% else %}
+						                            <strong>{{ religious_admin.mobile_number }}</strong>
+						                         {% endif %}
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						</div>
+					</div>
+			    </div>
+			</div>
+		</section>
+
+	<div id=modal class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+      				<p class="modal-card-title  has-text-white">Change Picture</p>
+      				<button class="delete" onclick="close_profile()"></button>
+    			</header>
+	    		<section class="modal-card-body">
+		    	<form action='' method='POST' enctype="multipart/form-data">
+		    		{{form.hidden_tag()}}
+		    		<div class='field'>
+		    			<div class="control">
+		    			<img class="image is-128x128" id='show'>
+		    			{{form.photo.label(class='label')}}
+		    			{{form.photo(class='input', accept=".jpg, .jpeg, .png,.gif'", onchange="profile()")}}
+		    			{% for e in form.photo.errors %}
+		    				{{e}}
+		    			{% endfor %}
+
+		    			</div>
+		    		</div>
+
+
+	      		</section>
+
+	    		<footer class="modal-card-foot buttons is-right">
+	    			{{form.submit(class="button add")}}
+	    		</footer>
+		    	</form>
+	  		</div>
+	</div>
+{% endblock %}

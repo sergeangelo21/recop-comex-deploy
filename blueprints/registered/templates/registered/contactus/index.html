@@ -1,0 +1,67 @@
+{% extends "registered-base.html" %}
+
+{% block content %}
+		<section class="hero-contact is-medium">
+          <div class="hero-body">
+              <div class="container-contact has-text-centered">
+                <h1 class="title has-text-white">
+                    CONTACT US
+                  </h1>
+                  <h2 class="subtitle size is-6">
+                    <strong class="has-text-white">Phone Number: 0966-705-7033</strong><br>
+                    <strong class="has-text-white">Land Line: 434-1234</strong><br>
+                    <strong class="has-text-white">Email Address: Recopcomex@yahoo.com</strong>
+                  </h2>
+              </div>
+           </div>
+      </section>
+      <br>
+      <div class="container"> 
+          <div class="columns is-centered">
+              <div class="column is-8">
+                <div class="notification contact">
+                    <div class="field">
+                      <div class="control has-icons-left">
+                          <input class="input" type="text" placeholder="Name">
+                          <span class="icon is-small is-left">
+                              <i class="fas fa-user"></i>
+                          </span>
+                      </div>
+                  </div>
+                    <div class="field">
+                        <div class="control has-icons-left">
+                          <input class="input" type="text" placeholder="Email Address">
+                          <span class="icon is-small is-left">
+                              <i class="fas fa-at"></i>
+                          </span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control has-icons-left">
+                          <input class="input" type="text" placeholder="Contact Number">
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                        </div>
+                    </div>
+                  <div class="field is-horizontal">
+                      <div class="field-body">
+                          <div class="field">
+                            <div class="control">
+                              <textarea class="textarea" placeholder="Explain how we can help you"></textarea>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="control send has-text-right">
+                        <button class="button is-primary">
+                            Send message
+                        </button>
+                    </div>
+              </div>
+              </div>
+          </div>
+      </div>
+      <br>
+
+{% endblock %}

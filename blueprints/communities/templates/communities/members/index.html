@@ -1,0 +1,95 @@
+{% extends "communities-base.html" %}
+
+{% block content %} 
+
+			<div class="notification gold">
+				<div class="columns is-left">
+					<div class="column search-box">
+						  <a class="button add" href="{{url_for('communities.member_add')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
+							&nbsp&nbsp&nbsp
+						<div class="field is-pulled-right has-addons has-addons-centered">
+							<div class="control">
+								<form action="" method="POST">
+								{{form.hidden_tag()}}
+						    		{{form.search(class_='input', placeholder='Search')}}
+							</div>
+							<p class="control">
+						     	{{form.submit(class_='button search')}}
+							</p>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="columns">
+
+				<div class="column">
+					<div class="card-header search-show">
+						<p class="card-header-title">
+							<span class="fas fa-poll-h"></span>&nbsp
+							{% if search!=' ' %}
+							You searched for &nbsp;
+							<span class="search-highlight">
+								&nbsp;'{{search}}'
+								<a href="{{url_for('communities.members', search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+							</span>
+							&nbsp; in
+							{% endif %}
+							Members
+						</p>
+						<div class="is-pulled-right">
+							<p class="card-header-title">
+								Total: {{((members|length)/2)|int}}
+							</p>
+						</div>
+					</div>
+					<div class="card list">
+						<div class="card-content">
+							<div class="table-responsive">
+								<table class="table is-striped is-hoverable is-fullwidth">
+								{% if members %}
+								<thead>
+									<tr>
+									    <th class="newlist">Name</th>
+									    <th class="newlist">Address</th>
+									    <th class="newlist">Occupation</th>
+									    <th class="newlist">Status</th>
+									    <th class="newlist hidedesktop">Actions</th>
+									 </tr>
+									
+								</thead>
+
+									{% for member in members %}
+										{% if member.member %}
+											{% include 'communities/members/_members.html' %}
+										{% endif %}
+									{% endfor %}
+
+								{% else %}
+
+					<table class="table is-fullwidth">
+						<thead></thead>
+					<tbody>
+
+						<tr class = "table-row">
+							<td class="has-text-centered">
+								<div class='field has-text-centered'>
+									<span class='tag is-warning is-large'>No results found</span>
+								</div>
+							</td>
+					 	</tr>
+						
+					</tbody>
+				</table>
+
+								{% endif %}
+							</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+{% endblock %}

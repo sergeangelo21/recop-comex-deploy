@@ -1,0 +1,113 @@
+									<tr class="table-row">
+										<td>{{event.id}}</td>
+									    <td>{{event.name}}
+									   		{% for attach in letters %}
+									    		{% if attach.event_id==event.id %}
+									    		<a class="tooltip" data-tooltip="Letter Attached"><i class="fas fa-paperclip"></i></a>
+									    		{% endif %}
+									    	{% endfor %}
+									    	{% if event.address!='San Sebastian College Recoletos de Cavite' and event.organizer_id!=1 %}
+									    		<a class="tooltip" data-tooltip="Non-Institutional"><i class="fas fa-asterisk"></i></a>
+									    	{% endif %}
+									    	{% if event.organizer_id==1 %}
+									    		<a class="tooltip" data-tooltip="ReCOP Event"><i class="fas fa-star"></i></a>
+									    	{% endif %}
+									    </td>
+									    <td>{% if event.organizer_id!=1 %}{{event.company_name}}{% else %}ReCOP Office{% endif %}</td>
+									    <td>{{event.event_date.strftime('%B %e, %Y')}}</td>
+									    {% if status=='all' or status=='pending' %}
+									    <td>
+									    	{% if event.event_status=='N' %}
+									    		New
+									    	{% elif event.event_status=='S' %}
+									    		Scheduled
+									    	{% elif event.event_status=='X' %}
+									    		Declined
+									    	{% elif event.event_status=='C' %}
+									    		Cancelled
+									    	{% elif event.event_status=='P' %}
+									    		{% if event.status=='A' %}
+									    			For Academic's Signing
+									    		{% elif event.status=='P' %}
+									    			For President's Signing
+									    		{% else %}
+									    			For FMI's Signing
+									    		{% endif %}
+									    	{% else %}
+									    		Finished
+									    	{% endif %}
+
+										</td>
+										{% endif %}
+										<td>
+											<a class="button is-warning tooltip" data-tooltip="View" href="{{url_for('admin.event_show', id=event.id)}}">
+												<span class="icon">
+													<i class="fa fa-eye"></i>
+												</span>
+											</a>
+											{% if event.event_status=='N' %}
+											{% if event.address=='San Seba%tian College Recoletos de Cavite' and event.organizer_id!=1 
+											%}
+											{% for attach in letters %}
+									    	{% if attach.event_id==event.id %}
+											<a class="button is-success tooltip" data-tooltip="Approve" href="{{url_for('admin.event_action', id=event.id, action='approve')}}">
+												<span class="icon">
+													<i class="fas fa-check-circle"></i>
+												</span>
+											</a>
+											<a class="button is-danger tooltip" data-tooltip="Decline" href="{{url_for('admin.event_action', id=event.id, action='decline')}}">
+												<span class="icon">
+													<i class="fas fa-times-circle x"></i>
+												</span>
+											</a>
+											{% endif %}
+											{% endfor %}
+											{% else %}
+											<a class="button is-success tooltip" data-tooltip="Approve" href="{{url_for('admin.event_action', id=event.id, action='approve')}}">
+												<span class="icon">
+													<i class="fas fa-check-circle"></i>
+												</span>
+											</a>
+											<a class="button is-danger tooltip" data-tooltip="Decline" href="{{url_for('admin.event_action', id=event.id, action='decline')}}">
+												<span class="icon">
+													<i class="fas fa-times-circle x"></i>
+												</span>
+											</a>
+											{% endif %}
+											{% elif event.event_status=='S' %}
+											{% if event.organizer_id==1 and event.event_date.strftime('%B %e, %Y')==now.strftime('%B %e, %Y') %}
+											<a class="button is-warning tooltip" data-tooltip="Conduct" href="{{url_for('admin.event_conduct', id=event.id)}}">
+												<span class="icon">
+													<i class="fas fa-exclamation"></i>
+												</span>
+											</a>
+											{% endif %}
+											{% if event.organizer_id==1 and event.event_date.strftime('%B %e, %Y')<now.strftime('%B %e, %Y') %}
+											<a class="button is-link tooltip" data-tooltip="Reschedule" href="{{url_for('admin.event_reschedule', id=event.id)}}">
+												<span class="icon">
+													<i class="fas fa-clock"></i>
+												</span>
+											</a>
+											{% endif %}
+											<a class="button is-danger tooltip" data-tooltip="Cancel" href="{{url_for('admin.event_action', id=event.id, action='cancel')}}">
+												<span class="icon">
+													<i class="fas fa-calendar-times"></i>
+												</span>
+											</a>
+											{% endif %}
+											{% if event.event_status=='F' %}
+											{% if event.organizer_id==1 %}
+											<a class="button is-success tooltip" data-tooltip="Photos" href="{{url_for('admin.event_photos', id=event.id)}}">
+												<span class="icon">
+													<i class="fas fa-images"></i>
+												</span>
+											</a>
+											{% endif %}
+											<a class="button is-primary tooltip" data-tooltip="Reports" href="{{url_for('admin.event_report', id=event.id)}}">
+												<span class="icon">
+													<i class="fas fa-folder-open"></i>
+												</span>
+											</a>
+											{% endif %}
+										</td>
+									</tr>

@@ -1,0 +1,390 @@
+ 
+	<div class="column is-one-quarter">
+		<div class="card select-list has-text-centered">
+			<div class="card-content all-view">
+				<div class="level">
+					<div class="level-item">
+						<img class="image is-128x128" src="../../../static/images/event-default.png">
+					</div>
+				</div>
+
+	      		<div class="title is-5">{{ event.name }}</div>
+	      		<p class="subtitle is-6">
+	      			<i class="fas fa-calendar"></i>&nbsp; {{event.event_date.strftime('%B %e, %Y')}}</br>
+					<i class="fas fa-map-marker-alt"></i>&nbsp; {{ event.location }}
+				</p>
+
+	      		<div class="button event-btn" onclick="show_event('{{event.id}}')">More Details</div>	
+			</div>
+		</div>
+	</div>
+
+	<div id={{event.id}}_modal class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+    				<p class="modal-card-title"></p>
+      				<button class="delete" onclick="close_event('{{event.id}}')"></button>
+				</header>
+	    		<div class="overlay-card-modal has-text-centered">
+			    	<div class="modal-media">
+			            <article class="media">
+			              	<figure class="media-left">
+				                <div class="circular-event-modal">
+				                	<img src="../../../static/images/event-default.png">
+				                </div>
+			              	</figure>
+			              	<div class="media-content">
+			                	<div class="content modal-text has-text-centered">
+				                	<p class="title is-size-4">{{event.name}}</p>
+				                	<i class="icon fas fa-calendar-alt"></i>{{event.event_date.strftime('%B %e, %Y')}}<br>
+				                	<span class="tag status-tag is-medium">
+				                		{% if event.event_status=='N' %}
+								    		New
+								    	{% elif event.event_status=='S' %}
+								    		Scheduled
+								    	{% elif event.event_status=='X' %}
+								    		Declined
+								    	{% elif event.event_status=='C' %}
+								    		Cancelled
+								    	{% elif event.event_status=='P' %}
+								    		Pending
+								    	{% else %}
+								    		Finished
+								    {% endif %}
+			                		</span>
+			                	</div>
+			              </div>
+			            </article>
+			        </div>
+			    </div>
+	    		<section class="modal-card-body">
+	    			<div class="container modal-show" id="info_div">
+				      	<div class="card">
+							<header class="card-header has-background-light">
+							    <p class="card-header-title">
+							    	Event Information
+							    </p>
+						  	</header>
+						  	<div class="card-content profile">
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-building prof-panel-icon"></i></span>
+									    	<p>Organizer</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.company_name}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-newspaper prof-panel-icon"></i></span>
+									    	<p>Description</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.description}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-exclamation prof-panel-icon"></i></span>
+									    	<p>Objective</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.objective}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
+									    	<p>Location</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.location}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-calendar-alt prof-panel-icon"></i></span>
+									  		<p>{% if event.status!='A' %}
+									    	Target Date
+									    	{% else %}
+									    	Date
+									  		{% endif %}</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.event_date.strftime('%B %e, %Y')}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-clipboard-list prof-panel-icon"></i></span>
+									  		<p>Thrust</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>
+									        			{% if event.thrust==1 %}
+									        				Educational
+									        			{% elif event.thrust==2 %}
+									        				Environmental
+									        			{% elif event.thrust==3 %}
+									        				Health
+									        			{% elif event.thrust==4 %}
+									        				Livelihood
+									        			{% elif event.thrust==5 %}
+									        				Socio-Political
+									        			{% elif event.thrust==6 %}
+									        				Spiritual   
+									        			{% endif %}
+									        		</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-calendar-alt prof-panel-icon"></i></span>
+									  		<p>Proposed On</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>
+									        			{{event.proposed_on.strftime('%B %e, %Y')}}
+									        		</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							</div>
+						</div>
+				    </div>
+
+			    <div class="card">
+				  	<header class="card-header has-background-light">
+					    <p class="card-header-title">
+					      Proposal Status: 
+								        		{% if event.event_status=='N' %}
+								        			For ReCOP Signing
+								        		{% elif event.event_status=='P' %}
+								        			{% if event.acad_signed %}
+								        				For FMI's Signing
+								        			{% elif event.fmi_signed %}
+								        				For President's Signing
+								        			{% elif event.recop_accepted %}
+								        				For Academics' Signing
+								       				{% endif %}
+								        		{% elif event.event_status=="S" %}
+								        			Approved
+								        		{% endif %}
+					    </p>
+					</header>
+				  	<div class="card-content tracker">
+					    <div class="content-track">
+					        <div class="columns is-centered">
+							{% if event.organizer_id!=1 %}
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-file-contract fa-4x track-icon {% if event.recop_accepted %} mark {% endif %}"></i>
+					          			<label class="label">Accepted</label>
+					          			{% if event.recop_accepted %} 
+					          			{{event.recop_accepted.strftime('%B %e, %Y')}}<br>
+					          			{{event.recop_accepted.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles {% if event.acad_signed %} mark {% endif %}">
+					          			<br>					          			
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-4x" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-user-graduate fa-4x track-icon {% if event.acad_signed %} mark {% endif %}"></i>
+					          			<label class="label">Academics</label>
+					          			{% if event.acad_signed %} 
+					          			{{event.acad_signed.strftime('%B %e, %Y')}}<br>
+					          			{{event.acad_signed.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles {% if event.fmi_signed %} mark {% endif %}">
+					          			<br>
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-4x" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	{%  endif %}
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-heart fa-4x track-icon {% if event.fmi_signed %} mark {% endif %}"></i>
+					          			<label class="label">FMI</label>
+					          			{% if event.fmi_signed %} 
+					          			{{event.fmi_signed.strftime('%B %e, %Y')}}<br>
+					          			{{event.fmi_signed.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles {% if event.approved_on %} mark {% endif %}">
+					          			<br>
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-4x" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-check fa-4x track-icon {% if event.approved_on %} mark {% endif %}"></i>
+					          			<label class="label">Approved</label>
+					          			{% if event.approved_on %} 
+					          			{{event.approved_on.strftime('%B %e, %Y')}}<br>
+					          			{{event.approved_on.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					        </div>
+					    </div>
+				  	</div>
+				  </div>
+		  		</section>
+	    	
+				<footer class="modal-card-foot buttons is-centered">
+	    			{% if event.address=='San Sebastian College Recoletos de Cavite' %}
+	    			<div class="columns"{% for attach in letters %}{% if attach.event_id==event.id %}style="display:none"{% endif %}{% endfor %}">
+	    				<div class="column">
+	    					<a href="{{url_for('linkages.event_letter', id = event.id, name = event.name)}}" target='_blank' class="level-item">
+			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-download"></i></span>&nbsp Request Letter</button>
+							</a>
+	    				</div>
+	    				<div class="column">
+		    		<form action="" method="POST" enctype="multipart/form-data">
+		    		{{form.hidden_tag()}}
+							<div class="file">
+							  <label class="file-label">
+								{{form.attach_letter(class_='file-input')}}
+							    <span class="file-cta">
+							      <span class="file-icon">
+							        <i class="fas fa-paperclip"></i>
+							      </span>
+							      <span class="file-label">
+ 							       Signed Letter
+							      </span>
+							    </span>
+							  </label>
+								{{form.event_id(hidden='True', value = event.id)}}
+								{{form.submit(class_='button is-success')}}	
+							</div>
+	    			  </form>
+	    			</div>
+	    		</div>
+	    			{% endif %}	
+	    			{% if event.event_status=='S' %}
+	    			<div class="columns">
+	    				<div class="column">
+	    				<button class="button is-warning" onclick="show_location('{{event.id}}')"><span class="fa fa-map"></span>&nbsp;Location</button>
+	    			</div>
+	    				{% if event.event_date.strftime('%B-%e-%Y')==now.strftime('%B-%e-%Y') %}
+	    				<div class="column">
+	    					<a href="{{url_for('linkages.event_conduct', id=event.id)}}" class="level-item">
+			  					<button class="button is-warning"><span class="icon is-small"><i class="fas fa-exclamation"></i></span>&nbsp Conduct</button>
+							</a>
+	    				</div>
+	    				{% endif %}
+	    				{% if event.organizer_id==1 and event.event_date.strftime('%B %e, %Y')<now.strftime('%B %e, %Y') %}
+	    				<div class="column">
+	    					<a href="{{url_for('linkages.event_reschedule', id=event.id)}}" class="level-item">
+			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-clock"></i></span>&nbsp Reschedule</button>
+							</a>
+	    				</div>
+						{% endif %}
+	    				<div class="column">
+	    					<a href="{{url_for('linkages.event_action', id=event.id, action='cancel')}}" class="level-item">
+			  					<button class="button is-danger"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Cancel</button>
+							</a>
+	    				</div>
+	    			</div>
+	    			{% endif %}
+	    			{% if event.event_status=='F' %}
+	    			<div class="columns">
+	    				<div class="column">
+	    					<a  href="{{url_for('linkages.event_photos', id=event.id)}}" class="level-item">
+			  					<button class="button is-success"><span class="icon is-small"><i class="fas fa-images"></i></span>&nbsp Photos</button>
+							</a>
+	    				</div>
+	    				<div class="column">
+	    					<a href="" class="level-item">
+			  					<button class="button is-primary"><span class="icon is-small"><i class="fas fa-folder-open"></i></span>&nbsp Reports</button>
+							</a>
+	    				</div>
+	    			</div>
+	    			{% endif %}
+
+    		</footer>
+	  		</div>
+	</div>
+
+	<div id={{event.id}}_location class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+     				<p class="modal-card-title has-text-white">{{event.name}} Location</p>
+      				<button class="delete" onclick="close_location('{{event.id}}')"></button>
+    			</header>
+	    		<section class="modal-card-body">
+	  				<div class="mapouter">
+						<div class="gmap_canvas">
+							<iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q={{event.location}}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+						</div>
+					</div>
+	      		</section>
+    	
+	    		<footer class="modal-card-foot buttons is-right">
+
+	    		</footer>
+	  		</div>
+	</div>
+	

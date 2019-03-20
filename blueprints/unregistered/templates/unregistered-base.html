@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        {% if title %}
+        <title>{{ title }} | ReCOP-ComEx</title>
+        {% else %}
+        <title>ReCOP-ComEx</title>
+        {% endif %}
+
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="../../../../static/css/bulma-0.7.2/css/bulma.css">
+        <link rel="stylesheet" href="../../../../static/css/fontawesome-5.5.0/css/all.css">
+        <link rel="stylesheet" href="../../../../static/css/recop-comex-style/css/style.css">
+        <link rel="stylesheet" href="../../../../static/css/recop-comex-style/css/modal.css">
+        <link rel="stylesheet" href="../../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.css">
+        <link rel="stylesheet" href="../../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.css">
+        <link rel="stylesheet" href="../../../../static/css/Bulma-extensions/bulma-tooltip/bulma-tooltip.min.css">
+        <script type="text/javascript" src = "../../../../static/scripts/base.js" ></script>   
+
+    </head>
+
+    <body>
+
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            
+            <div class="navbar-brand">
+                <a class="navbar-item" href="{{url_for('unregistered.index')}}">
+                    <img src="../../../static/images/logo-menu.png">
+                </a>
+
+                <span class="navbar-burger burger" data-target="navMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </span>
+            </div>
+
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item {% if active=='home' %}is-active{% endif %}" href="{{url_for('unregistered.index')}}">
+                        Home
+                    </a>
+                    <a class="navbar-item {% if active=='events' %}is-active{% endif %}" href="{{url_for('unregistered.events', status='all', page='1', search=' ')}}">
+                        Events
+                    </a>
+                    <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('unregistered.linkages', page='1', search=' ')}}">
+                        <strong>Linkages</strong>
+                    </a>
+                    <a class="navbar-item {% if active=='communities' %}is-active{% endif %}" href="{{url_for('unregistered.communities', page='1', search= ' ')}}">
+                        <strong>Communities</strong>
+                    </a>
+                    <a class="navbar-item {% if active=='donate' %}is-active{% endif %}" href="{{url_for('unregistered.donate')}}">
+                        <strong>Donate</strong>
+                    </a>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button is-primary" href="{{url_for('unregistered.signup_choose')}}">
+                                <strong>Sign up</strong>
+                            </a>
+                            <a class="button is-light" href="{{url_for('unregistered.login')}}">
+                                Log in
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% block content %} {% endblock %}
+        <footer class="footer-distributed">
+
+            <div class="footer-left">
+                <figure class="footer-logo">
+                        <a href="{{url_for('unregistered.index')}}">
+                    <img src="../../../static/images/logo-menu.png">
+                        </a>
+                 </figure>
+                     
+                
+                <p class="footer-links">
+                    <a href="{{url_for('unregistered.index')}}">Home</a>
+                    ·
+                    <a href="#">About</a>
+                    ·
+                    <a href="#">Terms and Conditions</a>
+                    ·
+                    <a href="#">Referrals</a>
+                    ·
+                    <a href="{{url_for('unregistered.contactus')}}">Contact Us</a>
+                </p>
+
+                <p class="footer-company-name">ReCOP-ComEx &copy; 2019</p>
+            </div>
+
+            <div class="footer-center">
+
+                <div>
+                    <i class="fa fa-map-marker-alt"></i>
+                    <p>Manila- Cavite Road, Sta. Cruz,<br> Cavite Ciy, 4100 Philippines</p>
+                </div>
+
+                <div>
+                  <a href="{{url_for('unregistered.contactus')}}">
+                    <i class="fa fa-phone"></i>
+                  </a> 
+                    <p>434-1234</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p><a href="Recopcomex@yahoo.com">Recopcomex@yahoo.com</a></p>
+                </div>
+
+            </div>
+
+            <div class="footer-right">
+
+                <p class="footer-company-about">
+                    <span>About the company</span>
+                    Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+                </p>
+
+                <div class="footer-icons">
+
+                    <a href="#"><i class="fab fa-facebook-square"></i></a>
+                    <a href="#"><i class="fab fa-twitter-square"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-google-plus-square"></i></a>
+                </div>
+
+            </div>
+
+        </footer>
+    </body>
+
+    <script type="text/javascript" src="../../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.js"></script>
+    <script type="text/javascript" src="../../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.js"></script>
+    <script type="text/javascript" src = "../../../../static/scripts/unregistered.js" ></script>
+    <script type = "text/javascript" src="../../../../static/scripts/sweetalert2.all.min.js"></script>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+             <script>
+                Swal.fire({
+                    title: "{{message}}", 
+                    type: "{{category}}",
+                    customClass: "modal",
+                    buttonsStyling: false,
+                    allowOutsideClick: false,
+                    heightAuto: false,
+                    confirmButtonClass: 'button is-medium submit'
+                })
+            </script>
+            {% endfor %}
+        {% endif %}
+    {% endwith %} 
+   
+</html>

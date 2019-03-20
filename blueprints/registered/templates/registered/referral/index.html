@@ -1,0 +1,86 @@
+{% extends "registered-base.html" %}
+
+{% block content %}
+		
+		<section class="hero is-fullheight">
+			<div class="hero-body">
+			    <div class="box white is-white referral">
+			    	<form action="" method="POST">
+			    		{{form.hidden_tag()}}
+					    <div class="columns">
+					      	<div class="column">
+					      		<article class="media">
+									<figure class="media-left">
+									    <a class="button is-outlined" href="{{url_for('registered.index')}}" role="button">
+											<span class="icon back-icon">
+									  			<i class="fas fa-arrow-alt-circle-left"></i>
+									  		</span>
+									  		<span>Back</span>
+									  	</a>
+									</figure>
+								</article>
+					      	</div>
+					    </div>
+
+				        <div class="columns">
+					      	<div class="column">
+					      		<p class="title has-text-centered">Referral Form</p>
+					      	</div>
+				     	</div>
+
+				     	<div class="columns">
+							<div class="column">
+								 <div class="field">
+							        {{form.name.label(class_='label')}}
+						            <div class="control has-icons-left">
+						            	{{form.name(class_='input', placeholder='Name')}}
+						            	{% for error in form.name.errors %}
+		                                <span style="color: red;">[{{ error }}]</span>
+		                                {% endfor %}
+		                                <span class="icon is-small is-left">
+		                                    <i class="fas fa-user"></i>
+		                                </span>
+						            </div>
+						        </div>
+
+		                        <div class="field">
+		                            {{form.email.label(class_='label')}}
+		                            <div class="control has-icons-left">
+		                                {{form.email(class_='input', placeholder='Email Address')}}
+		                                {% for error in form.email.errors %}
+		                                <span style="color: red;">[{{ error }}]</span>
+		                                {% endfor %}
+		                                <span class="icon is-small is-left">
+		                                    <i class="fas fa-envelope"></i>
+		                                </span>
+		                            </div>
+		                        </div>
+
+		                        <div class="field">
+		                            {{form.type.label(class_='label')}}
+		                            <div class="control has-icons-left">
+		                                {{form.type(class_='input')}}
+		                                {% for error in form.type.errors %}
+		                                <span style="color: red;">[{{ error }}]</span>
+		                                {% endfor %}
+		                                <span class="icon is-small is-left">
+		                                    <i class="fas fa-users"></i>
+		                                </span>
+		                            </div>
+		                        </div>
+		                        
+							</div>
+						</div>
+						<div class="field is-grouped is-grouped-centered">
+							<p class="control">
+							  	{{form.submit(class_='button submit')}}
+							</p>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+		</section>
+
+{% endblock %}

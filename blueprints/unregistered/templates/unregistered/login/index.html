@@ -1,0 +1,82 @@
+{% extends "unregistered-base.html" %}
+
+{% block content %}
+
+		<div class="container padding">
+			<div class="columns is-centered">
+				<div class="column is-7">
+					<div class="card">
+						<div class="card-content">
+							<div class="columns">
+								<div class="column is-half">
+									
+									<div class="level">
+									<div class="level-item">
+										<figure class="image">
+									<img class="is-rounded" src="../../../static/images/logo.png">
+										</figure>
+									</div>
+									</div>
+							
+								</div>
+								<div class="column">
+									<div class="field has-text-centered">
+										<label class="title is-3">LOGIN</label><br>
+										<label class="size is-size-7 has-text-grey">Please login to proceed</label>
+									</div>
+									<form action="" method="POST">
+										{{form.hidden_tag()}}
+										<div class="field">
+											{{form.username.label(class_='label')}}
+											<div class="control has-icons-left has-icons-right">
+												{{form.username(class_='input', placeholder='Username')}}
+                                                {% for error in form.username.errors %}
+                                                <span style="color: red;">[{{ error }}]</span>
+                                                {% endfor %}
+												<span class="icon is-small is-left">
+							      					<i class="fa fa-user"></i>
+							    				</span>
+											</div>
+										</div>
+
+										<div class="field">	
+											{{form.password.label(class_='label')}}
+											<div class="control has-icons-left has-icons-right">
+												{{form.password(class_='input', placeholder='Password')}}
+												{% for error in form.password.errors %}
+                                                <span style="color: red;">[{{ error }}]</span>
+                                                {% endfor %}
+												<span class="icon is-small is-left">
+							      					<i class="fa fa-key"></i>
+							    				</span>
+											</div>
+										</div>
+
+										<div class="field">
+											<p class="control has-text-left">
+						                    	<label class="checkbox has-text-grey-light is-size-7">
+						                      		<input type="checkbox">
+					                      			Remember me<br>
+					                      				<a class="has-text-grey is-size-7" href="{{url_for('unregistered.forgot_password')}}">Forgot your password? 
+						                    	</label>
+						               	    </p>
+										</div>
+
+										<div class="field has-text-centered">
+											{{form.submit(class_='button submit')}}
+										</div>
+
+										<div class="field has-text-centered">
+											<a class="has-text-grey is-size-7" href="{{url_for('unregistered.signup_choose')}}">Not a Member? <p style="color:#006400  ";>Sign up here.</p></a>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<div class="footer-margin-top"></div>
+
+{% endblock %}

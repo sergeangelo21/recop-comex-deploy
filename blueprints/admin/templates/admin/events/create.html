@@ -1,0 +1,212 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+
+		<section class="hero is-fullheight">
+			<div class="hero-body">
+			    <div class="box white is-white">
+			    	<form action="" method="POST" enctype="multipart/form-data">
+			    		{{form.hidden_tag()}}
+					    <div class="columns">
+					      	<div class="column">
+					      		<article class="media">
+									<figure class="media-left">
+									    <a class="button is-outlined" href="{{url_for('admin.events', status='all', page='1',search=' ')}}" role="button">
+											<span class="icon back-icon">
+                                                <i class="fas fa-arrow-alt-circle-left"></i>
+                                            </span>
+                                            <span>Back</span>
+									  	</a>
+									</figure>
+								</article>
+					      	</div>
+					    </div>
+
+				        <div class="columns">
+					      	<div class="column">
+					      		<p class="title has-text-centered">Outreach Activity Proposal Form</p>
+					      	</div>
+				     	</div>
+
+				     	<div class="columns">
+							<div class="column">
+								 <div class="field">
+							        {{form.title.label(class_='label')}}
+						            <div class="control">
+						            	{{form.title(class_='input')}}
+						            	{% for error in form.title.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+						            </div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+							<div class="column">
+								 <div class="field">
+							        {{form.event_date.label(class_='label')}}
+						            <div class="control">
+						            	{{form.event_date(class_='input', type='date')}}
+						            	{% for error in form.event_date.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								 <div class="field">
+							        {{form.location.label(class_='label')}}
+						            <div class="control">
+						            	{{form.location(class_='input')}}
+						            	{% for error in form.location.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+						            </div>
+						        </div>
+							</div>
+
+						</div>
+
+						<div class="columns">
+							<div class="column">
+								 <div class="field">
+							        {{form.description.label(class_='label')}}
+						            <div class="control">
+						            	{{form.description(class_='input')}}
+						            	{% for error in form.description.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+						            </div>
+						        </div>
+							</div>
+							<div class="column">
+								<div class="field">
+									{{form.objective.label(class_='label')}}
+						            <div class="control">
+										{{form.objective(class_='input')}}
+						            	{% for error in form.objective.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+									</div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+
+					      	<div class="column">
+					         	<div class="field">
+							        {{form.target_link.label(class_='label')}}{{form.target_link(hidden='True')}}
+						            <div class="control" id="link_div">
+						            	{{form.select_link(class_="input", onchange="add_comm()")}}
+						            </div>
+					          	</div>
+					        </div>
+
+							<div class="column">
+								<div class="field">
+							        {{form.participant_no.label(class_='label')}}
+						            <div class="control">
+						              	{{form.participant_no(class_='input')}}
+						            	{% for error in form.participant_no.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+							        <label class="label">Age Bracket</label>
+						            <div class="field is-horizontal">
+						            	<div class="field-body">
+						            		<div class="field">
+						            			<div class="control">
+									              	{{form.min_age(class_='input is-horizontal')}}
+									            	{% for error in form.min_age.errors %}
+			                                        	<span style="color: red;">[{{ error }}]</span>
+			                                        {% endfor %}
+												</div>
+						            		</div>
+						            		<label class="label">to &nbsp&nbsp</label>
+						            		<div class="field">
+						            			<div class="control">
+													{{form.max_age(class_='input is-horizontal')}}
+									            	{% for error in form.max_age.errors %}
+			                                        	<span style="color: red;">[{{ error }}]</span>
+			                                        {% endfor %}
+												</div>
+						            		</div>
+						            	</div>
+						            </div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+							<div class="column">
+								<div class="field">
+							        {{form.thrust.label(class_='label')}}
+						            <div class="control">
+						              	{{form.thrust(class_='input')}}
+						            	{% for error in form.thrust.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+									{{form.budget.label(class_='label')}}
+						            <div class="control">
+										{{form.budget(class_='input')}}
+						            	{% for error in form.budget.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+									</div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+							<div class="column">
+								<div class="field">
+							        {{form.budget_plan.label(class_='label')}}
+						            <div class="control">
+						              	{{form.budget_plan(class_='input', accept='.doc, .docx')}}
+						            	{% for error in form.budget_plan.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+									{{form.programme.label(class_='label')}}
+						            <div class="control">
+										{{form.programme(class_='input', accept='.doc, .docx')}}
+						            	{% for error in form.programme.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+									</div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="field is-grouped is-grouped-centered">
+							<p class="control">
+							  	{{form.submit(class_='button submit')}}
+							</p>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+		</section>
+
+{% endblock %}

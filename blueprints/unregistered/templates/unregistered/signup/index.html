@@ -1,0 +1,47 @@
+{% extends "unregistered-base.html" %}
+
+{% block content %}
+
+<div class="container padding">
+
+    <div class="title has-text-centered">
+
+    Create Your Account
+
+    <ul class="card1-list">
+    
+    <li class="card1">
+        <a class="card1-image has-text-success" href='{{url_for('unregistered.signup', type='linkage')}}'>
+            <span class="fas fa-hand-holding-heart fa-10x color" aria-hidden="true"></span>
+        </a>
+        <a class="card1-description notification gold" href='{{url_for('unregistered.signup', type='linkage')}}'>
+            <h2 class="title is-5">Linkage</h2>
+            
+        </a>
+    </li>
+
+    <li class="card1">
+        <a class="card1-image has-text-success" href='{{url_for('unregistered.signup', type='volunteer')}}'>
+            <span class="fas fa-users fa-10x color" aria-hidden="true"></span>
+        </a>
+        <a class="card1-description notification gold" href='{{url_for('unregistered.signup', type='volunteer')}}'>
+            <h2 class="title is-5">Volunteer</h2>         
+        </a>
+    </li>
+
+    <li class="card1">
+        <a class="card1-image has-text-success"  href='{{url_for('unregistered.signup', type='community')}}'>
+            <span class="fas fa-hands-helping fa-10x color" aria-hidden="true"></span>
+        </a>
+        <a class="card1-description notification gold"  href='{{url_for('unregistered.signup', type='community')}}'>
+            <h2 class="title is-5">Community</h2>
+        </a>
+    </li>  
+ 
+</ul>
+
+</div>  
+</div>
+<div class="footer-margin-top"></div>
+
+{% endblock %}
